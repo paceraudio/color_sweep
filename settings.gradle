@@ -1,0 +1,3 @@
+include ':wire'
+include ':app'
+rootProject.name = "Color Sweep"
