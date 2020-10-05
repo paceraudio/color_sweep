@@ -10,13 +10,16 @@ import kotlinx.coroutines.*
 class MainViewModel : ViewModel() {
 
     private var color: MutableLiveData<Color> = MutableLiveData()
+    private var _colors: MutableLiveData<List<Color>> = MutableLiveData(listOf())
+    var colors: LiveData<List<Color>> = _colors
 
-    fun obtainColor(): LiveData<Color?> {
-        return color
-    }
+//    fun obtainColor(): LiveData<com.paceraudio.wire.Color?> {
+//        return color
+//    }
 
     fun loadInitialColors() {
-        color.postValue(Color(MAX, MAX, MIN, MIN))
+        _colors.value = listOf(Color(MAX, MAX, MIN, MIN), Color(MAX, MIN, MAX, MAX))
+        //color.postValue(com.paceraudio.wire.Color(com.paceraudio.wire.MAX, com.paceraudio.wire.MAX, com.paceraudio.wire.MIN, com.paceraudio.wire.MIN))
     }
 
     fun startSweep() {
@@ -29,7 +32,8 @@ class MainViewModel : ViewModel() {
 
                 if (isActive) {
                     withContext(Dispatchers.Main) {
-                        color.postValue(Color(MAX, red, green, blue))
+                        _colors.value = listOf(Color(MAX, red, green, blue), Color(MAX, MAX - red, MAX - green, MAX - blue))
+                        //color.postValue(com.paceraudio.wire.Color(com.paceraudio.wire.MAX, red, green, blue))
                     }
                 }
                 delay(250L)
