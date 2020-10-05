@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.paceraudio.colorsweep"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -23,6 +23,20 @@ android {
         }
     }
 
+    buildFeatures {
+        compose true
+    }
+
+//    composeOptions {
+//        kotlinCompilerExtensionVersion compose_version
+//        kotlinCompilerVersion kotlin_version
+//    }
+
+    composeOptions {
+//        kotlinCompilerExtensionVersion "1.0.0-alpha04"
+        kotlinCompilerExtensionVersion jetpack_compose_version
+        kotlinCompilerVersion kotlin_version
+    }
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
@@ -45,6 +59,35 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
 
+    implementation 'androidx.compose.compiler:compiler:1.0.0-alpha04'
+
+    implementation "androidx.compose.animation:animation:$jetpack_compose_version"
+    implementation 'androidx.compose.animation:animation-core:1.0.0-alpha04'
+
+    implementation "androidx.compose.foundation:foundation:$jetpack_compose_version"
+    implementation "androidx.compose.foundation:foundation-layout:$jetpack_compose_version"
+    implementation 'androidx.compose.foundation:foundation-text:1.0.0-alpha04'
+
+    implementation "androidx.compose.material:material:$jetpack_compose_version"
+    implementation 'androidx.compose.material:material-icons-core:1.0.0-alpha04'
+    implementation "androidx.compose.material:material-icons-extended:$jetpack_compose_version"
+
+    implementation "androidx.compose.runtime:runtime-livedata:$jetpack_compose_version"
+    implementation "androidx.compose.runtime:runtime:$jetpack_compose_version"
+    implementation 'androidx.compose.runtime:runtime-dispatch:1.0.0-alpha04'
+    implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.0-alpha04'
+    implementation 'androidx.compose.runtime:runtime-saved-instance-state:1.0.0-alpha04'
+
+    implementation "androidx.compose.ui:ui:$jetpack_compose_version"
+    implementation "androidx.compose.ui:ui-text:$jetpack_compose_version"
+    implementation "androidx.compose.ui:ui-text-android:$jetpack_compose_version"
+    implementation 'androidx.compose.ui:ui-geometry:1.0.0-alpha04'
+    implementation 'androidx.compose.ui:ui-unit:1.0.0-alpha04'
+    implementation 'androidx.compose.ui:ui-util:1.0.0-alpha04'
+    implementation 'androidx.compose.ui:ui-viewbinding:1.0.0-alpha04'
+    implementation "androidx.ui:ui-tooling:$jetpack_compose_version"
+
+
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$android_test_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
@@ -53,3 +96,13 @@ dependencies {
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
+
+// Compiler flag to use experimental Compose APIs
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += [
+                "-Xopt-in=kotlin.RequiresOptIn"
+        ]
+    }
+}
