@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.paceraudio.colorsweep.R
@@ -15,8 +14,8 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var messageTv: TextView
-    private lateinit var messageTv2: TextView
+    private lateinit var colorVw1: View
+    private lateinit var colorVw2: View
     private val viewModel: MainViewModel by viewModels<MainViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -26,8 +25,8 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        messageTv = view.findViewById(R.id.message)
-        messageTv2 = view.findViewById(R.id.message2)
+        colorVw1 = view.findViewById(R.id.colorVw1)
+        colorVw2 = view.findViewById(R.id.colorVw2)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -42,17 +41,16 @@ class MainFragment : Fragment() {
                 if (colors.size >= 2) {
                     val color = colors[0]
                     val compliment = colors[1]
-                    messageTv.text = Integer.toBinaryString(color.color)
-                    messageTv.setTextColor(compliment.color)
-                    messageTv.setBackgroundColor(color.color)
-
-                    messageTv2.text = Integer.toBinaryString(compliment.color)
-                    messageTv2.setTextColor(color.color)
-                    messageTv2.setBackgroundColor(compliment.color)
+                    colorVw1.setBackgroundColor(color.color)
+                    colorVw2.setBackgroundColor(compliment.color)
                 }
             }
         )
-        viewModel.loadInitialColors()
         viewModel.startSweep()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.stopSweep()
     }
 }
