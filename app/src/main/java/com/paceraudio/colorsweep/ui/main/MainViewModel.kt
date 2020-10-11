@@ -12,7 +12,7 @@ class MainViewModel : ViewModel() {
     private var color: MutableLiveData<Color> = MutableLiveData()
     private var _colors: MutableLiveData<List<Color>> = MutableLiveData(listOf())
     var colors: LiveData<List<Color>> = _colors
-    private val sweeper = Sweeper()
+    private val colorManager = ColorManager(2, Sweeper())
     var step = 0
     var job: Job? = null
 
@@ -23,17 +23,14 @@ class MainViewModel : ViewModel() {
     fun startSweep() {
         job = viewModelScope.launch(Dispatchers.Default) {
             while (isActive) {
-                val i = step % STEPS
-                val red = sweeper.calcValueAtStep(R_STEPS, i)
-                val green = sweeper.calcValueAtStep(G_STEPS, i)
-                val blue = sweeper.calcValueAtStep(B_STEPS, i)
+                colorManager.updateColors(step)
                 step++
                 if (isActive) {
                     withContext(Dispatchers.Main) {
-                        _colors.value = listOf(Color(MAX, red, green, blue), Color(MAX, MAX - red, MAX - green, MAX - blue))
+                        _colors.value = colorManager.obtainColors()
                     }
                 }
-                delay(10L)
+                delay(20L)
             }
         }
     }
