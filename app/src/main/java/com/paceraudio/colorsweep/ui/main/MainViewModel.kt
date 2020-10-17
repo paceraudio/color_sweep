@@ -9,12 +9,12 @@ import kotlinx.coroutines.*
 
 class MainViewModel : ViewModel() {
 
-    private var color: MutableLiveData<Color> = MutableLiveData()
+//    private var color: MutableLiveData<Color> = MutableLiveData()
     private var _colors: MutableLiveData<List<Color>> = MutableLiveData(listOf())
     var colors: LiveData<List<Color>> = _colors
     private val colorManager = ColorManager(2, Sweeper())
-    var step = 0
-    var job: Job? = null
+    private var step = 0
+    private var job: Job? = null
 
     fun setUp() {
 
