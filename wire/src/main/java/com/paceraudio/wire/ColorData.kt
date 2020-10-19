@@ -13,6 +13,10 @@ private fun calcIntValue(alpha: Int, red: Int, green: Int, blue: Int): Int {
     return a or r or g or blue
 }
 
-data class Color(val alpha: Int, val red: Int, val green: Int, val blue: Int) {
+data class ColorData(val alpha: Int, val red: Int, val green: Int, val blue: Int) {
     val color: Int = calcIntValue(alpha, red, green, blue)
+}
+
+data class ColorsWrapper(val colors: List<ColorData>) {
+    val trick = colors.size * (if (colors.isNotEmpty()) colors[0].color else 0)
 }

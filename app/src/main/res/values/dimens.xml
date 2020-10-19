@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="view_width">340dp</dimen>
+    <dimen name="compose_view_width">170dp</dimen>
     <dimen name="view_width_half">170dp</dimen>
+    <integer name="compose_view_width_i">300</integer>
 </resources>

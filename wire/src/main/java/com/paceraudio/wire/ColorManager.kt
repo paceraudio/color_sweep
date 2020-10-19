@@ -14,11 +14,11 @@ class ColorManager(private val numColors: Int, private val sweeper: Sweeper) {
     private val currentColors = MutableList(numColors) { index -> transferColors(index) }
 
 
-    fun obtainColors(): List<Color> {
+    fun obtainColors(): List<ColorData> {
         return currentColors
     }
 
-    private fun transferColors(index: Int): Color {
+    private fun transferColors(index: Int): ColorData {
         return initialColors[index]
     }
 
@@ -30,11 +30,11 @@ class ColorManager(private val numColors: Int, private val sweeper: Sweeper) {
         return list
     }
 
-    private fun initColors(numColors: Int): List<Color> {
-        val list: MutableList<Color> = mutableListOf()
+    private fun initColors(numColors: Int): List<ColorData> {
+        val list: MutableList<ColorData> = mutableListOf()
         for (i in 0 until numColors) {
             val step = initialSteps[i]
-            val color = Color(
+            val color = ColorData(
                 MAX,
                 sweeper.calcValueAtStep(R_STEPS, step),
                 sweeper.calcValueAtStep(G_STEPS, step),
@@ -75,16 +75,16 @@ class ColorManager(private val numColors: Int, private val sweeper: Sweeper) {
         }
     }
 
-    private fun updateColor(loopStep: Int, index: Int): Color {
+    private fun updateColor(loopStep: Int, index: Int): ColorData {
         val offsetStep = loopStep + initialSteps[index]
         val stepForColor = calcStep(offsetStep, index, STEPS, sweepRates)
         val red = sweeper.calcValueAtStep(R_STEPS, stepForColor)
         val green = sweeper.calcValueAtStep(G_STEPS, stepForColor)
         val blue = sweeper.calcValueAtStep(B_STEPS, stepForColor)
-        return Color(MAX, red, green, blue)
+        return ColorData(MAX, red, green, blue)
     }
 
-    fun generateComplimentary(color: Color): Color {
-        return Color(MAX, MAX - color.red, MAX - color.green, MAX - color.blue)
+    fun generateComplimentary(colorData: ColorData): ColorData {
+        return ColorData(MAX, MAX - colorData.red, MAX - colorData.green, MAX - colorData.blue)
     }
 }

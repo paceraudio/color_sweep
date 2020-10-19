@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.paceraudio.colorsweep.R
-import com.paceraudio.wire.Color
+import com.paceraudio.wire.ColorData
 import com.paceraudio.wire.MIN
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -16,7 +16,7 @@ class ColorView @JvmOverloads constructor(context: Context,
                                           attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : View(context, attrs, defStyleAttr) {
 
-    var color: Color = Color(MIN, MIN, MIN, MIN)
+    var colorData: ColorData = ColorData(MIN, MIN, MIN, MIN)
     private val paint = Paint()
     private val radius = this.width / 2f
     private val squared = radius.pow(2)
