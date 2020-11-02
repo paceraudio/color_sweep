@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 30
@@ -54,32 +56,35 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
 
-    implementation 'androidx.compose.compiler:compiler:1.0.0-alpha04'
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    implementation "androidx.compose.compiler:compiler:$jetpack_compose_version"
 
     implementation "androidx.compose.animation:animation:$jetpack_compose_version"
-    implementation 'androidx.compose.animation:animation-core:1.0.0-alpha04'
+    implementation "androidx.compose.animation:animation-core:$jetpack_compose_version"
 
     implementation "androidx.compose.foundation:foundation:$jetpack_compose_version"
     implementation "androidx.compose.foundation:foundation-layout:$jetpack_compose_version"
-    implementation 'androidx.compose.foundation:foundation-text:1.0.0-alpha04'
+    implementation "androidx.compose.foundation:foundation-text:$jetpack_compose_version"
 
     implementation "androidx.compose.material:material:$jetpack_compose_version"
-    implementation 'androidx.compose.material:material-icons-core:1.0.0-alpha04'
+    implementation "androidx.compose.material:material-icons-core:$jetpack_compose_version"
     implementation "androidx.compose.material:material-icons-extended:$jetpack_compose_version"
 
     implementation "androidx.compose.runtime:runtime-livedata:$jetpack_compose_version"
     implementation "androidx.compose.runtime:runtime:$jetpack_compose_version"
-    implementation 'androidx.compose.runtime:runtime-dispatch:1.0.0-alpha04'
-    implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.0-alpha04'
-    implementation 'androidx.compose.runtime:runtime-saved-instance-state:1.0.0-alpha04'
+    implementation "androidx.compose.runtime:runtime-dispatch:$jetpack_compose_version"
+    implementation "androidx.compose.runtime:runtime-rxjava2:$jetpack_compose_version"
+    implementation "androidx.compose.runtime:runtime-saved-instance-state:$jetpack_compose_version"
 
     implementation "androidx.compose.ui:ui:$jetpack_compose_version"
     implementation "androidx.compose.ui:ui-text:$jetpack_compose_version"
     implementation "androidx.compose.ui:ui-text-android:$jetpack_compose_version"
-    implementation 'androidx.compose.ui:ui-geometry:1.0.0-alpha04'
-    implementation 'androidx.compose.ui:ui-unit:1.0.0-alpha04'
-    implementation 'androidx.compose.ui:ui-util:1.0.0-alpha04'
-    implementation 'androidx.compose.ui:ui-viewbinding:1.0.0-alpha04'
+    implementation "androidx.compose.ui:ui-geometry:$jetpack_compose_version"
+    implementation "androidx.compose.ui:ui-unit:$jetpack_compose_version"
+    implementation "androidx.compose.ui:ui-util:$jetpack_compose_version"
+    implementation "androidx.compose.ui:ui-viewbinding:$jetpack_compose_version"
     implementation "androidx.ui:ui-tooling:$jetpack_compose_version"
     implementation 'com.google.android.material:material:1.2.1'
 

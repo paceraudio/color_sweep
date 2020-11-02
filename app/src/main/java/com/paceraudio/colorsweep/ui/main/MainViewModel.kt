@@ -27,10 +27,28 @@ class MainViewModel : ViewModel() {
     private val colorManager = ColorManager(2, Sweeper())
     private var step = 0
     private var job: Job? = null
+    private var running: Boolean = false
 
     private val className = this::class.java.simpleName
 
     fun setUp() {
+        colorManager.updateColors(step)
+        _colors.value = colorManager.obtainColors()
+        _color1.value = _colors.value?.get(0)
+        _color2.value = _colors.value?.get(1)
+    }
+
+    fun onClick() {
+        if (BuildConfig.DEBUG) {
+        	Log.d(COLOR_TAG,"$className onClick() running: $running" )
+        }
+        running = if (running) {
+            stopSweep()
+            false
+        } else {
+            startSweep()
+            true
+        }
     }
 
     fun startSweep() {

@@ -1,7 +1,7 @@
 package com.paceraudio.colorsweep.ui.main
 
-import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.ui.tooling.preview.Preview
-import com.paceraudio.colorsweep.BuildConfig
 import com.paceraudio.wire.COLOR_TAG
 import com.paceraudio.wire.ColorData
 import com.paceraudio.wire.MAX
@@ -24,20 +23,19 @@ private const val TAG = COLOR_TAG
 fun DualColorScreen(
     colorList: List<ColorData>,
     sizeDp: Dp,
-    modifier: Modifier
+    modifier: Modifier,
+    onClick: () -> Unit
 ) {
-    if (BuildConfig.DEBUG) {
-    	Log.d(TAG, "DualColorScreen running $colorList")
-    }
     modifier.background(color = Color.Black)
     DualColorColumn(
         colorList = colorList,
-        sizeDp = sizeDp
+        sizeDp = sizeDp,
+        onClick = onClick
     )
 }
 
 @Composable
-fun DualColorColumn(colorList: List<ColorData>, sizeDp: Dp) {
+fun DualColorColumn(colorList: List<ColorData>, sizeDp: Dp, onClick: () -> Unit) {
     if (colorList.size == 2) {
         Column(
             modifier = Modifier
@@ -45,6 +43,7 @@ fun DualColorColumn(colorList: List<ColorData>, sizeDp: Dp) {
                 .fillMaxHeight()
                 .fillMaxWidth()
                 .wrapContentSize(Alignment.Center)
+                .clickable(onClick = onClick)
         ) {
 
             ColorBox(shape = CircleShape, sizeDp = sizeDp, colorData = colorList[0])
@@ -75,6 +74,7 @@ fun DefaultPreview() {
 
         ),
         sizeDp = Dp(330f),
-        modifier = Modifier
+        modifier = Modifier,
+        onClick = {}
     )
 }
