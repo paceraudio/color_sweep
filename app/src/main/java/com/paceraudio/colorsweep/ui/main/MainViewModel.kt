@@ -14,15 +14,15 @@ class MainViewModel : ViewModel() {
 
     private var _colors: MutableLiveData<List<ColorData>> = MutableLiveData(listOf<ColorData>())
     var colors: LiveData<List<ColorData>> = _colors
-    var colorList: List<ColorData> = mutableListOf()
+    private var colorList: List<ColorData> = mutableListOf()
 
     private var _color1: MutableLiveData<ColorData> = MutableLiveData()
     var color1: LiveData<ColorData> = _color1
     private var _color2: MutableLiveData<ColorData> = MutableLiveData()
     var color2: LiveData<ColorData> = _color2
 
-    private var _colorsWrapper = MutableLiveData<ColorsWrapper>()
-    var colorsWrapper: LiveData<ColorsWrapper> = _colorsWrapper
+//    private var _colorsWrapper = MutableLiveData<ColorsWrapper>()
+//    var colorsWrapper: LiveData<ColorsWrapper> = _colorsWrapper
 
     private val colorManager = ColorManager(2, Sweeper())
     private var step = 0
@@ -75,5 +75,6 @@ class MainViewModel : ViewModel() {
 
     fun stopSweep() {
         job?.cancel()
+        colorManager.onSweepStopped(step)
     }
 }

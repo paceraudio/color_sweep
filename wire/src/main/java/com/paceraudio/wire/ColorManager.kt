@@ -8,14 +8,31 @@ const val MAX_RATE = 16.0
 
 class ColorManager(private val numColors: Int, private val sweeper: Sweeper) {
 
+    /** Stores the starting point of each color, a value on the color wheel */
     val initialSteps: List<Int> = initSteps(numColors)
+
+    /** Stores the rate at which each color will change per loop tick (so colors change at different rates) */
     val sweepRates = initSweepRates(numColors)
     val initialColors = initColors(numColors)
+
+    val sweepConfigs: List<SweepConfig> = initSweepConfigs(numColors)
+
+    /** Stores the current colors for each loop tick */
     private val currentColors = MutableList(numColors) { index -> transferColors(index) }
+
+    private val sweepRecorder: SweepRecorder = MemorySweepRecorder()
 
 
     fun obtainColors(): List<ColorData> {
         return currentColors
+    }
+
+    private fun initSweepConfigs(numColors: Int): List<SweepConfig> {
+        val sweepingColors = mutableListOf<SweepConfig>()
+        for (i in 0 until numColors) {
+            sweepingColors.add(SweepConfig(calcRandomStep(), calcRandomSweepRate()))
+        }
+        return sweepingColors
     }
 
     private fun transferColors(index: Int): ColorData {
@@ -69,6 +86,10 @@ class ColorManager(private val numColors: Int, private val sweeper: Sweeper) {
         }
     }
 
+    fun calcStep2(loopStep: Int, sweepConfig: SweepConfig, totalSteps: Int): Int {
+        return (loopStep * sweepConfig.rate).toInt() % totalSteps
+    }
+
     fun updateColors(loopStep: Int) {
         for (i in sweepRates.indices) {
             currentColors[i] = updateColor(loopStep, i)
@@ -76,8 +97,9 @@ class ColorManager(private val numColors: Int, private val sweeper: Sweeper) {
     }
 
     private fun updateColor(loopStep: Int, index: Int): ColorData {
-        val offsetStep = loopStep + initialSteps[index]
-        val stepForColor = calcStep(offsetStep, index, STEPS, sweepRates)
+        val offsetStep = loopStep + sweepConfigs[index].offset
+        val stepForColor = calcStep2(offsetStep, sweepConfigs[index], STEPS)
+//        val stepForColor = calcStep(offsetStep, index, STEPS, sweepRates)
         val red = sweeper.calcValueAtStep(R_STEPS, stepForColor)
         val green = sweeper.calcValueAtStep(G_STEPS, stepForColor)
         val blue = sweeper.calcValueAtStep(B_STEPS, stepForColor)
@@ -86,5 +108,9 @@ class ColorManager(private val numColors: Int, private val sweeper: Sweeper) {
 
     fun generateComplimentary(colorData: ColorData): ColorData {
         return ColorData(MAX, MAX - colorData.red, MAX - colorData.green, MAX - colorData.blue)
+    }
+
+    fun onSweepStopped(loopStep: Int) {
+        sweepRecorder.storeTurn(sweepConfigs, loopStep)
     }
 }
