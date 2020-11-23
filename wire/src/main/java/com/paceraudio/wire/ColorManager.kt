@@ -22,6 +22,9 @@ class ColorManager(private val numColors: Int, private val sweeper: Sweeper) {
 
     private val sweepRecorder: SweepRecorder = MemorySweepRecorder()
 
+    fun setUpTurn(numColors: Int) {
+
+    }
 
     fun obtainColors(): List<ColorData> {
         return currentColors
@@ -99,7 +102,6 @@ class ColorManager(private val numColors: Int, private val sweeper: Sweeper) {
     private fun updateColor(loopStep: Int, index: Int): ColorData {
         val offsetStep = loopStep + sweepConfigs[index].offset
         val stepForColor = calcStep2(offsetStep, sweepConfigs[index], STEPS)
-//        val stepForColor = calcStep(offsetStep, index, STEPS, sweepRates)
         val red = sweeper.calcValueAtStep(R_STEPS, stepForColor)
         val green = sweeper.calcValueAtStep(G_STEPS, stepForColor)
         val blue = sweeper.calcValueAtStep(B_STEPS, stepForColor)
