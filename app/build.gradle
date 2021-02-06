@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 
@@ -56,7 +56,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
 
-    implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation "com.google.dagger:hilt-android:2.31.2-alpha"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     implementation "androidx.compose.compiler:compiler:$jetpack_compose_version"
@@ -66,7 +66,7 @@ dependencies {
 
     implementation "androidx.compose.foundation:foundation:$jetpack_compose_version"
     implementation "androidx.compose.foundation:foundation-layout:$jetpack_compose_version"
-    implementation "androidx.compose.foundation:foundation-text:$jetpack_compose_version"
+    //implementation "androidx.compose.foundation:foundation-text:$jetpack_compose_version"
 
     implementation "androidx.compose.material:material:$jetpack_compose_version"
     implementation "androidx.compose.material:material-icons-core:$jetpack_compose_version"
@@ -79,20 +79,24 @@ dependencies {
     implementation "androidx.compose.runtime:runtime-saved-instance-state:$jetpack_compose_version"
 
     implementation "androidx.compose.ui:ui:$jetpack_compose_version"
-    implementation "androidx.compose.ui:ui-text:$jetpack_compose_version"
-    implementation "androidx.compose.ui:ui-text-android:$jetpack_compose_version"
+    //implementation "androidx.compose.ui:ui-text:$jetpack_compose_version"
+    //implementation "androidx.compose.ui:ui-text-android:$jetpack_compose_version"
     implementation "androidx.compose.ui:ui-geometry:$jetpack_compose_version"
     implementation "androidx.compose.ui:ui-unit:$jetpack_compose_version"
     implementation "androidx.compose.ui:ui-util:$jetpack_compose_version"
     implementation "androidx.compose.ui:ui-viewbinding:$jetpack_compose_version"
-    implementation "androidx.ui:ui-tooling:$jetpack_compose_version"
-    implementation 'com.google.android.material:material:1.2.1'
+    //implementation "androidx.ui:ui-tooling:$jetpack_compose_version"
+    implementation 'com.google.android.material:material:1.3.0'
 
 
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$android_test_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
 
+}
+
+kapt {
+    correctErrorTypes true
 }
 
 sourceCompatibility = "1.8"

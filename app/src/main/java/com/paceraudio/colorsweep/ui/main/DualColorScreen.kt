@@ -11,7 +11,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
-import androidx.ui.tooling.preview.Preview
 import com.paceraudio.wire.COLOR_TAG
 import com.paceraudio.wire.ColorData
 import com.paceraudio.wire.MAX
@@ -64,7 +63,7 @@ fun ColorBox(shape: Shape, sizeDp: Dp, colorData: ColorData) {
     }
 }
 
-@Preview
+//@Preview
 @Composable
 fun DefaultPreview() {
     DualColorScreen(
