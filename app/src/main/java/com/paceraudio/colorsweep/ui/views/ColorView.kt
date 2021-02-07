@@ -1,4 +1,4 @@
-package com.paceraudio.colorsweep.ui.main
+package com.paceraudio.colorsweep.ui.views
 
 import android.content.Context
 import android.graphics.Canvas
@@ -7,8 +7,8 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.paceraudio.colorsweep.R
-import com.paceraudio.wire.ColorData
-import com.paceraudio.wire.MIN
+import com.paceraudio.wire.models.ColorData
+import com.paceraudio.wire.models.MIN
 import kotlin.math.pow
 import kotlin.math.sqrt
 

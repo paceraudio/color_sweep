@@ -1,5 +1,8 @@
 package com.paceraudio.wire
 
+import com.paceraudio.wire.models.SweepConfig
+import com.paceraudio.wire.models.SweepTurn
+
 class MemorySweepRecorder : SweepRecorder {
 
     private val sweepTurnList: MutableList<SweepTurn> = mutableListOf()

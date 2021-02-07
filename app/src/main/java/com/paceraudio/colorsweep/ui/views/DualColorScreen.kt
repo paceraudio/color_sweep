@@ -12,9 +12,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import com.paceraudio.wire.COLOR_TAG
-import com.paceraudio.wire.ColorData
-import com.paceraudio.wire.MAX
-import com.paceraudio.wire.MIN
+import com.paceraudio.wire.models.ColorData
+import com.paceraudio.wire.models.MAX
+import com.paceraudio.wire.models.MIN
 
 private const val TAG = COLOR_TAG
 

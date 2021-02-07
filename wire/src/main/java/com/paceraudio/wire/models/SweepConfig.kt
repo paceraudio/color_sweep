@@ -1,4 +1,4 @@
-package com.paceraudio.wire
+package com.paceraudio.wire.models
 /** Data class that holds the initial offset from 0 (color starting point) and the rate of change
  * for the color (how fast the color sweeps across the color wheel). */
 data class SweepConfig(val offset: Int, val rate: Double) {

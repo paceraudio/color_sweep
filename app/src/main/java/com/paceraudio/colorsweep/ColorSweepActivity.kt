@@ -14,13 +14,14 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.Dp
+import com.paceraudio.colorsweep.BuildConfig
 import com.paceraudio.colorsweep.ui.main.DualColorScreen
-import com.paceraudio.colorsweep.ui.main.MainViewModel
-import com.paceraudio.colorsweep.ui.main.UiUtil
+import com.paceraudio.colorsweep.ui.viewmodels.ColorSweepViewModel
+import com.paceraudio.colorsweep.util.UiUtil
 import com.paceraudio.wire.COLOR_TAG
-import com.paceraudio.wire.ColorData
-import com.paceraudio.wire.MAX
-import com.paceraudio.wire.MIN
+import com.paceraudio.wire.models.ColorData
+import com.paceraudio.wire.models.MAX
+import com.paceraudio.wire.models.MIN
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -28,7 +29,7 @@ private const val TAG = COLOR_TAG
 
 @AndroidEntryPoint
 class ColorSweepActivity : AppCompatActivity() {
-    private val colorViewModel by viewModels<MainViewModel>()
+    private val colorViewModel by viewModels<ColorSweepViewModel>()
     @Inject
     lateinit var uiUtil: UiUtil
 
@@ -65,16 +66,11 @@ class ColorSweepActivity : AppCompatActivity() {
     }
 
     @Composable
-    private fun FirstColorScreen(colorViewModel: MainViewModel, circleSizePx: Float) {
+    private fun FirstColorScreen(colorViewModel: ColorSweepViewModel, circleSizePx: Float) {
         /* TODO figure this out, when we observe a list, this only runs when the size changes.
         *   We are only observing the second color so that we still only run this once both colors change.*/
         val color2: ColorData by colorViewModel.color2.observeAsState(
-            initial = ColorData(
-                MAX,
-                MIN,
-                MIN,
-                MIN
-            )
+            initial = ColorData(MAX, MAX, MAX, MAX)
         )
         colorViewModel.color1.value?.let { c1 ->
             DualColorScreen(

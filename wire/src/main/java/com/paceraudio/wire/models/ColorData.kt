@@ -1,4 +1,4 @@
-package com.paceraudio.wire
+package com.paceraudio.wire.models
 
 const val MAX = 255
 const val MIN = 0

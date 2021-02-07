@@ -1,9 +1,10 @@
 package com.paceraudio.wire
 
+import com.paceraudio.wire.models.MAX
+import com.paceraudio.wire.models.SweepConfig
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import java.lang.IllegalArgumentException
 import java.lang.reflect.Method
 
 class ColorManagerTest {

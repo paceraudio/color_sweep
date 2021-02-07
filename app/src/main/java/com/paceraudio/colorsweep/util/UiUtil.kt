@@ -1,4 +1,4 @@
-package com.paceraudio.colorsweep.ui.main
+package com.paceraudio.colorsweep.util
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext

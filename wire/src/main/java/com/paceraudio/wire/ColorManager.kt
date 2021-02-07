@@ -1,5 +1,8 @@
 package com.paceraudio.wire
 
+import com.paceraudio.wire.models.ColorData
+import com.paceraudio.wire.models.MAX
+import com.paceraudio.wire.models.SweepConfig
 import java.lang.IllegalArgumentException
 import kotlin.random.Random
 
