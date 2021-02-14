@@ -1,6 +1,9 @@
 package com.paceraudio.wire
 
 import com.paceraudio.wire.models.ColorData
+import com.paceraudio.wire.models.ColorDataAverage
+import com.paceraudio.wire.models.averageDoubleValue
+import com.paceraudio.wire.models.averageIntValue
 import kotlin.math.abs
 
 const val TOTAL_VALUES = 256
@@ -10,63 +13,36 @@ private const val TOTAL_SPACES = 3
 class TurnEvaluator {
 
     fun evaluateTurn(colorsToRate: List<ColorData>) {
-        var firstR = 0
-        var firstG = 0
-        var firstB = 0
+        val colorDataAverage = calcAverageColor(colorsToRate)
 
-        var runningRTotal = 0.0
-        var runningGTotal = 0.0
-        var runningBTotal = 0.0
-
-        var runningRAcc = 0.0
-        var runningGAcc = 0.0
-        var runningBAcc = 0.0
-        for (totalColors in colorsToRate.indices) {
-            val color = colorsToRate[totalColors]
-            when {
-                totalColors == 0 -> {
-                    firstR = color.red
-                    firstG = color.green
-                    firstB = color.blue
-                }
-                else -> {
-                    val rAcc = checkMatch(firstR, color.red)
-                    val gAcc = checkMatch(firstG, color.green)
-                    val bAcc = checkMatch(firstB, color.blue)
-
-                    runningRTotal += rAcc
-                    runningGTotal += gAcc
-                    runningBTotal += bAcc
-                }
-            }
-        }
-        val totRAcc = runningRAcc / max(1.0, colorsToRate.size - 1.0)
     }
 
-//    fun evaluateTurn(colorsToRate: List<ColorData>) {
-//        var firstR = 0
-//        var firstG = 0
-//        var firstB = 0
-//
-//        var runningRAcc = 0.0
-//        var runningGAcc = 0.0
-//        var runningBAcc = 0.0
-//        for (totalColors in colorsToRate.indices) {
-//            val color = colorsToRate[totalColors]
-//            when {
-//                totalColors == 0 -> {
-//                    firstR = color.red
-//                    firstG = color.green
-//                    firstB = color.blue
-//                }
-//                else -> {
-//                    val rAcc = checkMatch(firstR, color.red)
-//                    val gAcc = checkMatch(firstG, color.green)
-//                    val bAcc = checkMatch(firstB, color.blue)
-//                }
-//            }
-//        }
-//    }
+    internal fun calcAverageColor(colors: List<ColorData>): ColorDataAverage {
+        var alphaTotal = 0.0
+        var redTotal = 0.0
+        var greenTotal = 0.0
+        var blueTotal = 0.0
+        val size = colors.size
+
+        for (i in colors.indices) {
+            val color = colors[i]
+            alphaTotal += color.alpha
+            redTotal += color.red
+            greenTotal += color.green
+            blueTotal += color.blue
+        }
+
+        return ColorDataAverage(
+            alpha = averageDoubleValue(alphaTotal, size),
+            red = averageDoubleValue(redTotal, size),
+            green = averageDoubleValue(greenTotal, size),
+            blue = averageDoubleValue(blueTotal, size)
+        )
+    }
+
+    fun calcDiffFromAverage(colorDataAverage: ColorDataAverage) {
+
+    }
 
     private fun checkMatch(val1: Int, val2: Int): Double {
         val diff = abs(val1 - val2)

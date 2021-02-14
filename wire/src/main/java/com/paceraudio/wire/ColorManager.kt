@@ -111,10 +111,6 @@ class ColorManager(private val numColors: Int, private val sweeper: Sweeper) {
         return ColorData(MAX, red, green, blue)
     }
 
-    fun generateComplimentary(colorData: ColorData): ColorData {
-        return ColorData(MAX, MAX - colorData.red, MAX - colorData.green, MAX - colorData.blue)
-    }
-
     fun onSweepStopped(loopStep: Int) {
         sweepRecorder.storeTurn(sweepConfigs, loopStep)
     }
