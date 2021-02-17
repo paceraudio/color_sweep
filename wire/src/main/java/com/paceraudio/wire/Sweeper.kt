@@ -1,5 +1,7 @@
 package com.paceraudio.wire
 
+import com.paceraudio.wire.models.MAX
+import com.paceraudio.wire.models.MIN
 import java.lang.IllegalArgumentException
 import java.lang.RuntimeException
 

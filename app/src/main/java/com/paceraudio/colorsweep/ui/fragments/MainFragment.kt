@@ -1,4 +1,4 @@
-package com.paceraudio.colorsweep.ui.main
+package com.paceraudio.colorsweep.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.paceraudio.colorsweep.R
+import com.paceraudio.colorsweep.ui.viewmodels.ColorSweepViewModel
 
 class MainFragment : Fragment() {
 
@@ -16,7 +17,7 @@ class MainFragment : Fragment() {
 
     private lateinit var colorVw1: View
     private lateinit var colorVw2: View
-    private val viewModel: MainViewModel by viewModels<MainViewModel>()
+    private val viewModel: ColorSweepViewModel by viewModels<ColorSweepViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {

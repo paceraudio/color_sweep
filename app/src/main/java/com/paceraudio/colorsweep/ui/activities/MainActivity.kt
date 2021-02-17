@@ -1,11 +1,12 @@
-package com.paceraudio.colorsweep
+package com.paceraudio.colorsweep.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowInsets
 import android.view.WindowManager
-import com.paceraudio.colorsweep.ui.main.MainFragment
+import com.paceraudio.colorsweep.R
+import com.paceraudio.colorsweep.ui.fragments.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

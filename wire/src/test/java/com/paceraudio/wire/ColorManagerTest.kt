@@ -1,9 +1,10 @@
 package com.paceraudio.wire
 
+import com.paceraudio.wire.models.MAX
+import com.paceraudio.wire.models.SweepConfig
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import java.lang.IllegalArgumentException
 import java.lang.reflect.Method
 
 class ColorManagerTest {
@@ -58,42 +59,42 @@ class ColorManagerTest {
 
     @Test
     fun `test rate of two point zero`() {
-        val step = colorManager.calcStep(10, 0, 100, listOf(2.0, 8.0))
+        val step = colorManager.calcStep2(10, SweepConfig(0, 2.0), 100)
         assertEquals(20, step)
     }
 
     @Test
     fun `test rate of two point zero with loop step more that total steps`() {
-        val step = colorManager.calcStep(210, 0, 100, listOf(2.0, 8.0))
+        val step = colorManager.calcStep2(210, SweepConfig(0, 2.0), 100)
         assertEquals(20, step)
     }
 
     @Test
     fun `test rate of eight point zero`() {
-        val step = colorManager.calcStep(10, 1, 100, listOf(2.0, 8.0))
+        val step = colorManager.calcStep2(10, SweepConfig(0, 8.0), 100)
         assertEquals(80, step)
     }
 
     @Test
     fun `test rate of eight point five`() {
-        val step = colorManager.calcStep(10, 1, 100, listOf(2.0, 8.5))
+        val step = colorManager.calcStep2(10, SweepConfig(0, 8.5), 100)
         assertEquals(85, step)
     }
 
     @Test
     fun `test rate of eight point five with loop step more that total steps`() {
-        val step = colorManager.calcStep(210, 1, 100, listOf(2.0, 8.5))
+        val step = colorManager.calcStep2(210, SweepConfig(0, 8.5), 100)
         assertEquals(85, step)
     }
 
     @Test
     fun `test rate of eight point zero with loop step more that total steps`() {
-        val step = colorManager.calcStep(210, 1, 100, listOf(2.0, 8.0))
+        val step = colorManager.calcStep2(210, SweepConfig(0, 8.0), 100)
         assertEquals(80, step)
     }
-
-    @Test(expected = IllegalArgumentException::class)
-    fun `test index out of rates bounds`() {
-        colorManager.calcStep(210, 5, 100, listOf(2.0, 8.0))
-    }
+//
+//    @Test(expected = IllegalArgumentException::class)
+//    fun `test index out of rates bounds`() {
+//        colorManager.calcStep2(210, SweepConfig(0, 8.0), 100)
+//    }
 }
