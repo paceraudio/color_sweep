@@ -1,10 +1,10 @@
 package com.paceraudio.colorsweep
 
-import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Surface
@@ -12,16 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.Dp
-import com.paceraudio.colorsweep.BuildConfig
-import com.paceraudio.colorsweep.ui.main.DualColorScreen
+import com.paceraudio.colorsweep.ui.views.DualColorScreen
 import com.paceraudio.colorsweep.ui.viewmodels.ColorSweepViewModel
 import com.paceraudio.colorsweep.util.UiUtil
 import com.paceraudio.wire.COLOR_TAG
 import com.paceraudio.wire.models.ColorData
 import com.paceraudio.wire.models.MAX
-import com.paceraudio.wire.models.MIN
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -35,8 +32,8 @@ class ColorSweepActivity : AppCompatActivity() {
 
     private val className = this::class.java.simpleName
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
         requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
@@ -59,10 +56,6 @@ class ColorSweepActivity : AppCompatActivity() {
                 FirstColorScreen(colorViewModel = colorViewModel, size)
             }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 
     @Composable

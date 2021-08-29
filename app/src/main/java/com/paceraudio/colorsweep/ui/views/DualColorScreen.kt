@@ -1,4 +1,4 @@
-package com.paceraudio.colorsweep.ui.main
+package com.paceraudio.colorsweep.ui.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -56,7 +56,7 @@ fun ColorBox(shape: Shape, sizeDp: Dp, colorData: ColorData) {
     Box(
         modifier = Modifier
             .padding(Dp(14f))
-            .preferredSize(size = sizeDp)
+            .requiredSize(size = sizeDp)
             .clip(shape = shape)
             .background(color = Color(colorData.color))
     ) {

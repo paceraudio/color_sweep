@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-//apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.paceraudio.colorsweep"
@@ -30,7 +29,6 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerVersion "1.4.0"
         kotlinCompilerExtensionVersion jetpack_compose_version
     }
 
@@ -57,37 +55,31 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_android_version"
 
-    implementation "com.google.dagger:hilt-android:2.31.2-alpha"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
-    implementation "androidx.compose.compiler:compiler:$jetpack_compose_version"
-
-    implementation "androidx.compose.animation:animation:$jetpack_compose_version"
-    implementation "androidx.compose.animation:animation-core:$jetpack_compose_version"
-
+    implementation "androidx.compose.ui:ui:$jetpack_compose_version"
+    // Tooling support (Previews, etc.)
+    implementation "androidx.compose.ui:ui-tooling:$jetpack_compose_version"
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation "androidx.compose.foundation:foundation:$jetpack_compose_version"
-    implementation "androidx.compose.foundation:foundation-layout:$jetpack_compose_version"
-    //implementation "androidx.compose.foundation:foundation-text:$jetpack_compose_version"
-
+    // Material Design
     implementation "androidx.compose.material:material:$jetpack_compose_version"
+    // Material design icons
     implementation "androidx.compose.material:material-icons-core:$jetpack_compose_version"
     implementation "androidx.compose.material:material-icons-extended:$jetpack_compose_version"
-
+    // Integration with activities
+    implementation "androidx.activity:activity-compose:1.3.1"
+    // Integration with ViewModels
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
+    // Integration with observables
     implementation "androidx.compose.runtime:runtime-livedata:$jetpack_compose_version"
-    implementation "androidx.compose.runtime:runtime:$jetpack_compose_version"
-    implementation "androidx.compose.runtime:runtime-dispatch:$jetpack_compose_version"
     implementation "androidx.compose.runtime:runtime-rxjava2:$jetpack_compose_version"
-    implementation "androidx.compose.runtime:runtime-saved-instance-state:$jetpack_compose_version"
 
-    implementation "androidx.compose.ui:ui:$jetpack_compose_version"
-    //implementation "androidx.compose.ui:ui-text:$jetpack_compose_version"
-    //implementation "androidx.compose.ui:ui-text-android:$jetpack_compose_version"
-    implementation "androidx.compose.ui:ui-geometry:$jetpack_compose_version"
-    implementation "androidx.compose.ui:ui-unit:$jetpack_compose_version"
-    implementation "androidx.compose.ui:ui-util:$jetpack_compose_version"
-    implementation "androidx.compose.ui:ui-viewbinding:$jetpack_compose_version"
-    //implementation "androidx.ui:ui-tooling:$jetpack_compose_version"
-    implementation 'com.google.android.material:material:1.3.0'
+    // UI Tests
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$jetpack_compose_version"
+
+    implementation 'com.google.android.material:material:1.4.0'
 
 
     testImplementation "junit:junit:$junit_version"
@@ -96,7 +88,6 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "android.arch.core:core-testing:$androidCoreTesting"
     testImplementation 'org.hamcrest:hamcrest-library:1.3'
-    //androidTestImplementation 'com.android.support.test:runner:1.0.2'
 
 }
 
@@ -106,11 +97,3 @@ kapt {
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
-
-// Compiler flag to use experimental Compose APIs
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-    kotlinOptions {
-        jvmTarget = "1.8"
-        freeCompilerArgs += ["-Xallow-jvm-ir-dependencies", "-Xskip-prerelease-check"]
-    }
-}
