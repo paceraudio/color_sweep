@@ -25,6 +25,7 @@ class SweeperTest {
     private val step6 = 1275
 
 
+    // TODO change this, test outputs instead of internals
     @Before
     fun setUp() {
         sweeper = Sweeper()
